@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><script id="markerShader" type="shader">precision highp float;
+      precision highp sampler2D;
+
+      uniform highp float gameTimeMs;
+      uniform highp float decayTimeMs;
+      uniform highp float mulR;
+      uniform highp float mulG;
+      uniform highp float mulB;
+
+      varying vec2 vTextureCoord;
+      uniform sampler2D uTexture;
+
+      void main() {
+        vec4 c = texture2D(uTexture, vTextureCoord);
+        highp float val = (c.r - gameTimeMs) / decayTimeMs;
+        val = clamp(val, 0.0, 1.0);
+        val = val * val;
+        c.r = mulR * val;
+        c.g = mulG * val;
+        c.b = mulB * val;
+        gl_FragColor = c;
+      }</script><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>Ants</title><script defer="defer" src="/static/js/main.9b9d4d1f.js"></script><link href="/static/css/main.073c9b0a.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
